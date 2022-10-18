@@ -1,37 +1,34 @@
 package oit.is.z0268.kaizi.janken.model;
 
-import java.util.ArrayList;
+public class Janken {
+  String hand;
+  String cpuHand;
+  String kekka;
 
-/**
- * Spring BootでModelとして扱われるクラス フレームワークがフィールドに値を代入したり，取得したりするため，getter/setterが必要
- */
-public class janken {
-  ArrayList<Double> numList = new ArrayList<>();
-  double ave;
+  public Janken(String hand, String cpuHand) {
+    this.hand = hand;
+    this.cpuHand = cpuHand;
+    makeGame(hand, cpuHand);
+  }
 
-  // コンストラクタ
-  public janken(ArrayList<Double> numList) {
-    this.numList = numList;
-    double sum = 0;
-    for (Double num : numList) {
-      sum = sum + num;
+  public void makeGame(String hand, String cpuHand) {
+    if (hand.equals("Gu") && cpuHand.equals("Gu") || hand.equals("Choki") && cpuHand.equals("Choki")
+        || hand.equals("Pa") && cpuHand.equals("Pa")) {
+      this.kekka = "Draw";
+    } else if (hand.equals("Gu") && cpuHand.equals("Choki") || hand.equals("Choki") && cpuHand.equals("Pa")
+        || hand.equals("Pa") && cpuHand.equals("Gu")) {
+      this.kekka = "You Win!!";
+    } else if (hand.equals("Gu") && cpuHand.equals("Pa") || hand.equals("Choki") && cpuHand.equals("Gu")
+        || hand.equals("Pa") && cpuHand.equals("Choki")) {
+      this.kekka = "you lose...";
     }
-    ave = sum / numList.size();
   }
 
-  public ArrayList<Double> getNumList() {
-    return numList;
+  public String getCpuHand() {
+    return this.cpuHand;
   }
 
-  public void setNumList(ArrayList<Double> numList) {
-    this.numList = numList;
-  }
-
-  public double getAve() {
-    return ave;
-  }
-
-  public void setAve(double ave) {
-    this.ave = ave;
+  public String getkekka() {
+    return this.kekka;
   }
 }
